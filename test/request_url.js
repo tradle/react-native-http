@@ -1,10 +1,5 @@
-global.window = global;
-global.location = {
-    host: 'localhost:8081',
-    port: 8081,
-    protocol: 'http:'
-};
 
+var parseUrl = require('url').parse
 var noop = function() {};
 global.XMLHttpRequest = function() {
   this.open = noop;
@@ -20,7 +15,11 @@ var http = require('../index.js');
 
 
 test('Test simple url string', function(t) {
-  var url = { path: '/api/foo' };
+  var url = {
+    host: 'localhost:8081',
+    path: '/api/foo'
+  };
+
   var request = http.get(url, noop);
 
   t.equal( request.uri, 'http://localhost:8081/api/foo', 'Url should be correct');
@@ -66,25 +65,19 @@ test('Test alt protocol', function(t) {
 
 });
 
-test('Test string as parameters', function(t) {
-  var url = '/api/foo';
-  var request = http.get(url, noop);
-
-  t.equal( request.uri, 'http://localhost:8081/api/foo', 'Url should be correct');
-  t.end();
-
-});
-
 test('Test withCredentials param', function(t) {
-  var url = '/api/foo';
+  var url = 'http://localhost/api/foo'
+  var parsed = parseUrl('http://localhost/api/foo');
+  parsed.withCredentials = false
 
-  var request = http.request({ url: url, withCredentials: false }, noop);
+  var request = http.request(parsed, noop);
   t.equal( request.xhr.withCredentials, false, 'xhr.withCredentials should be false');
 
-  var request = http.request({ url: url, withCredentials: true }, noop);
+  parsed.withCredentials = true
+  var request = http.request(parsed, noop);
   t.equal( request.xhr.withCredentials, true, 'xhr.withCredentials should be true');
 
-  var request = http.request({ url: url }, noop);
+  var request = http.request(url, noop);
   t.equal( request.xhr.withCredentials, true, 'xhr.withCredentials should be true');
 
   t.end();
@@ -92,21 +85,24 @@ test('Test withCredentials param', function(t) {
 
 test('Test POST XHR2 types', function(t) {
   t.plan(3);
-  var url = '/api/foo';
+  var url = 'http://localhost/api/foo';
+  var parsed = parseUrl(url)
+  parsed.method = 'POST'
 
-  var request = http.request({ url: url, method: 'POST' }, noop);
+  var request = http.request(url, noop);
   request.xhr.send = function (data) {
     t.ok(data instanceof global.ArrayBuffer, 'data should be instanceof ArrayBuffer');
   };
+
   request.end(new global.ArrayBuffer());
 
-  request = http.request({ url: url, method: 'POST' }, noop);
+  request = http.request(parsed, noop);
   request.xhr.send = function (data) {
     t.ok(data instanceof global.Blob, 'data should be instanceof Blob');
   };
   request.end(new global.Blob());
 
-  request = http.request({ url: url, method: 'POST' }, noop);
+  request = http.request(parsed, noop);
   request.xhr.send = function (data) {
     t.ok(data instanceof global.FormData, 'data should be instanceof FormData');
   };
