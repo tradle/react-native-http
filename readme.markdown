@@ -8,23 +8,25 @@ When you `require('http')` in
 [react-native](http://github.com/facebook/react-native),
 this module will be loaded.
 
+_adapted from John Hiesey's [stream-http](https://github.com/jhiesey/stream-http), thanks John!_
+
 # example
 
-``` js
-var http = require('http');
+```js
+var http = require('http')
 
 http.get({ path : '/beep' }, function (res) {
-    var div = document.getElementById('result');
-    div.innerHTML += 'GET /beep<br>';
-    
+    var div = document.getElementById('result')
+    div.innerHTML += 'GET /beep<br>'
+
     res.on('data', function (buf) {
-        div.innerHTML += buf;
-    });
-    
+        div.innerHTML += buf
+    })
+
     res.on('end', function () {
-        div.innerHTML += '<br>__END__';
-    });
-});
+        div.innerHTML += '<br>__END__'
+    })
+})
 ```
 
 # http methods
@@ -90,40 +92,12 @@ Return an http header, if set. `key` is case-insensitive.
 * res.statusCode, the numeric http response code
 * res.headers, an object with all lowercase keys
 
-# compatibility
-
-This module has been tested and works with:
-
-* Internet Explorer 5.5, 6, 7, 8, 9
-* Firefox 3.5
-* Chrome 7.0
-* Opera 10.6
-* Safari 5.0
-
-Multipart streaming responses are buffered in all versions of Internet Explorer
-and are somewhat buffered in Opera. In all the other browsers you get a nice
-unbuffered stream of `"data"` events when you send down a content-type of
-`multipart/octet-stream` or similar.
-
-# protip
-
-You can do:
-
-````javascript
-var bundle = browserify({
-    require : { http : 'http-browserify' }
-});
-````
-
-in order to map "http-browserify" over `require('http')` in your browserified
-source.
-
 # install
 
 With [npm](https://npmjs.org) do:
 
 ```
-npm install http-browserify
+npm install react-native-http
 ```
 
 # license
