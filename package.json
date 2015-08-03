@@ -1,9 +1,8 @@
 {
-  "name": "http-browserify",
-  "version": "1.7.0",
-  "description": "http module compatability for browserify",
+  "name": "react-native-http",
+  "version": "1.0.0",
+  "description": "http module compatibility for react-native",
   "main": "index.js",
-  "browserify": "index.js",
   "directories": {
     "lib": ".",
     "example": "example",
@@ -22,19 +21,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/substack/http-browserify.git"
+    "url": "http://github.com/mvayngrib/react-native-http.git"
   },
   "keywords": [
     "http",
-    "browserify",
+    "react-native",
     "compatible",
-    "meatless",
-    "browser"
+    "shim"
   ],
-  "author": {
-    "name": "James Halliday",
-    "email": "mail@substack.net",
-    "url": "http://substack.net"
-  },
   "license": "MIT/X11"
 }

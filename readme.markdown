@@ -1,11 +1,11 @@
-# http-browserify
+# react-native-http
 
 The
 [http](http://nodejs.org/docs/v0.4.10/api/all.html#hTTP) module from node.js,
-but for browsers.
+but for React Native.
 
 When you `require('http')` in
-[browserify](http://github.com/substack/node-browserify),
+[react-native](http://github.com/facebook/react-native),
 this module will be loaded.
 
 # example
