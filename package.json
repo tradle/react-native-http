@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/mvayngrib/react-native-http.git"
+    "url": "https://github.com/tradle/react-native-http.git"
   },
   "keywords": [
     "http",
