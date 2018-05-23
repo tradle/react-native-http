@@ -1,5 +1,5 @@
 {
-  "name": "@tradle/react-native-http",
+  "name": "react-native-http",
   "version": "2.0.0",
   "description": "http module compatibility for react-native",
   "main": "index.js",
