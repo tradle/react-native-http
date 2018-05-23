@@ -1,6 +1,6 @@
 var http = require('../../');
 
-var opts = { path : '/beep', method : 'GET' };
+http.get({ path : '/beep' , host: '127.0.0.1', port: 8082, method: 'GET'}, function (res) {
 var req = http.request(opts, function (res) {
     var div = document.getElementById('result');
     
