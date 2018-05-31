@@ -29,13 +29,6 @@ http.get({ path : '/beep' }, function (res) {
 })
 ```
 
-### Run example
-```
-browserify main.js > bundle.js
-node server.js
-# open browser and open 127.0.0.1:8082
-```
-
 # http methods
 
 var http = require('http');
